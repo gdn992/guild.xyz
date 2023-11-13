@@ -17,7 +17,7 @@ const CreateGuildButton = ({ isDisabled }: Props): JSX.Element => {
     <Button
       flexShrink={0}
       colorScheme="green"
-      isDisabled={response || isLoading || isSigning || isDisabled}
+      isDisabled={Boolean(response || isLoading || isSigning || isDisabled)}
       isLoading={isLoading || isSigning}
       loadingText={signLoadingText || "Saving data"}
       onClick={handleSubmit(onSubmit)}

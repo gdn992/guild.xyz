@@ -87,7 +87,7 @@ const ConnectPlatformButton = ({ type, isReconnect = false }) => {
     <Button
       isLoading={isLoading}
       onClick={onConnect}
-      isDisabled={response}
+      isDisabled={Boolean(response)}
       colorScheme={isReconnect ? "orange" : platforms[type].colorScheme}
       variant={isReconnect ? "subtle" : "solid"}
       size="sm"

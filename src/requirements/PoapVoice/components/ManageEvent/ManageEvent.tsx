@@ -178,7 +178,7 @@ const ManageEvent = ({ poapId }): JSX.Element => {
                   })
                 }
                 isLoading={isLoading}
-                isDisabled={sumTime}
+                isDisabled={Boolean(sumTime)}
                 loadingText="Please wait"
               >
                 {sumTime

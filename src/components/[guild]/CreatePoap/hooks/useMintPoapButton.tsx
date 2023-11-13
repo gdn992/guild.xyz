@@ -18,6 +18,7 @@ import ErrorAlert from "components/common/ErrorAlert"
 import { Modal } from "components/common/Modal"
 import { ArrowSquareOut, CheckCircle } from "phosphor-react"
 import { useAccount } from "wagmi"
+import { ButtonProps } from "../../../common/Button"
 
 const useMintPoapButton = (poapId: number) => {
   const { address } = useAccount()
@@ -26,7 +27,7 @@ const useMintPoapButton = (poapId: number) => {
 
   const { onSubmit, response, ...rest } = useClaimPoap(poapId)
 
-  const buttonProps = response
+  const buttonProps: ButtonProps = response
     ? { as: "a", target: "_blank", href: `${response}?address=${address}` }
     : {
         onClick: () => {

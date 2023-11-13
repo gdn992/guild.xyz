@@ -1,6 +1,6 @@
-import { ButtonProps } from "@chakra-ui/react"
 import { PropsWithChildren } from "react"
 import JoinStep from "./JoinStep"
+import { ButtonProps } from "../../../common/Button"
 
 type Props = {
   account: string

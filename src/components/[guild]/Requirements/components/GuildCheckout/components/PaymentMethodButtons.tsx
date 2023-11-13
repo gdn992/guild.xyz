@@ -38,7 +38,7 @@ const PaymentMethodButtons = () => {
             w="full"
             borderRadius="md"
             isDisabled
-            _hover={""}
+            _hover={{ _hover: "" }} // todo: check is the hover working properly
           >
             Pay with card
           </Button>

@@ -1,5 +1,5 @@
-import { ButtonProps, IconButton, Tooltip } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import { IconButton, Tooltip } from "@chakra-ui/react"
+import Button, { ButtonProps } from "components/common/Button"
 import { useIntercom } from "components/_app/IntercomProvider"
 import { Flag } from "phosphor-react"
 import { useEffect } from "react"
@@ -12,10 +12,7 @@ type Props = {
 const label = "Report guild"
 const className = "report-guild-btn"
 
-const ReportGuildButton = ({
-  layout = "FULL",
-  ...buttonProps
-}: Props): JSX.Element => {
+const ReportGuildButton = ({ layout = "FULL", ...rest }: Props): JSX.Element => {
   const { id, name } = useGuild()
   const { addIntercomSettings } = useIntercom()
 
@@ -26,14 +23,14 @@ const ReportGuildButton = ({
     return () => addIntercomSettings({ reportedGuildName: null })
   }, [id, name])
 
-  const baseButtonProps = {
+  const baseButtonProps: ButtonProps = {
     className,
     size: "sm",
     variant: "ghost",
   }
 
   return layout === "FULL" ? (
-    <Button {...baseButtonProps} leftIcon={<Flag />} {...buttonProps}>
+    <Button {...baseButtonProps} leftIcon={<Flag />} {...rest}>
       {label}
     </Button>
   ) : (
@@ -45,7 +42,8 @@ const ReportGuildButton = ({
         boxSize={8}
         rounded="full"
         minW="none"
-        {...buttonProps}
+        {...rest}
+        colorScheme={rest.colorScheme as string}
       />
     </Tooltip>
   )

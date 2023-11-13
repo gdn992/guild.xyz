@@ -1,13 +1,5 @@
-import {
-  ButtonGroup,
-  ButtonProps,
-  Circle,
-  HStack,
-  Icon,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react"
-import Button from "components/common/Button"
+import { ButtonGroup, Circle, HStack, Icon, Text, Tooltip } from "@chakra-ui/react"
+import Button, { ButtonProps } from "components/common/Button"
 import { Check } from "phosphor-react"
 import React, { PropsWithChildren } from "react"
 
@@ -76,7 +68,7 @@ const JoinStep = ({
             minW="max-content"
             maxW={isDone && "40"}
             {...buttonProps}
-            isDisabled={isDone || buttonProps.isDisabled}
+            isDisabled={Boolean(isDone || buttonProps.isDisabled)}
             borderRightRadius={!!addonButton && 0}
           >
             {buttonLabel}

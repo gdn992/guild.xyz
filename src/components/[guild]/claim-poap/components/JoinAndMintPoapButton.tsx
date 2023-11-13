@@ -1,9 +1,9 @@
-import { ButtonProps, useDisclosure } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/react"
 import { MintModal } from "components/[guild]/CreatePoap/hooks/useMintPoapButton"
 import useJoin from "components/[guild]/JoinModal/hooks/useJoin"
 import useClaimPoap from "components/[guild]/claim-poap/hooks/useClaimPoap"
 import useIsMember from "components/[guild]/hooks/useIsMember"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import useToast from "hooks/useToast"
 import { ArrowSquareOut } from "phosphor-react"
 import { forwardRef } from "react"
@@ -46,7 +46,7 @@ const JoinAndMintPoapButton = forwardRef(
     const { isLoading: isJoinLoading, onSubmit: onJoinSubmit } =
       useJoin(handleSubmit)
 
-    const props = response
+    const props: ButtonProps = response
       ? {
           as: "a",
           target: "_blank",

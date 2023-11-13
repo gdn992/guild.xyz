@@ -1,6 +1,5 @@
 import {
   Box,
-  ButtonProps,
   Center,
   Code,
   Icon,
@@ -14,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import ErrorAlert from "components/common/ErrorAlert"
 import { Modal } from "components/common/Modal"
 import useAccess from "components/[guild]/hooks/useAccess"

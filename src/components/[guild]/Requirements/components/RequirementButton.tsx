@@ -1,10 +1,9 @@
 import { Img } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import { ArrowSquareOut } from "phosphor-react"
 import { forwardRef, PropsWithChildren } from "react"
-import { Rest } from "types"
 
-type Props = PropsWithChildren<Rest>
+type Props = PropsWithChildren<ButtonProps>
 
 const RequirementButton = forwardRef(({ children, ...rest }: Props, ref: any) => (
   <Button

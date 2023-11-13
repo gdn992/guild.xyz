@@ -58,7 +58,7 @@ const WithdrawButton = (): JSX.Element => {
             <Icon as={isDisabledLabel || isOnVaultsChain ? Wallet : LinkBreak} />
           )
         }
-        isDisabled={isPreparing || isLoading || isDisabledLabel}
+        isDisabled={Boolean(isPreparing || isLoading || isDisabledLabel)}
         onClick={
           isOnVaultsChain && !isPreparing
             ? onSubmitTransaction
