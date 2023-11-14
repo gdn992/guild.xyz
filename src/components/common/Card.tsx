@@ -6,12 +6,12 @@ import {
 } from "@chakra-ui/react"
 import { forwardRef } from "react"
 
-type Props = {
+export type CardProps = {
   isFullWidthOnMobile?: boolean
 } & HTMLChakraProps<"div">
 
 const Card = forwardRef(
-  ({ isFullWidthOnMobile = false, children, ...rest }: Props, ref: any) => {
+  ({ isFullWidthOnMobile = false, children, ...rest }: CardProps, ref: any) => {
     const { colorMode } = useColorMode()
 
     return (
