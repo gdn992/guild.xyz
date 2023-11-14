@@ -2,8 +2,8 @@ import React from "react"
 import { useGameRecords } from "./hooks/useGameRecords"
 import Card from "../common/Card"
 import { HStack, Text, useColorMode } from "@chakra-ui/react"
-import GuildIconCard from "./GuildIconCard"
 import { GameDifficultColor } from "../../types"
+import ScoreBoard from "./ScoreBoard"
 
 const GameRecord: React.FC = () => {
   const {
@@ -20,29 +20,26 @@ const GameRecord: React.FC = () => {
         fontWeight="bold"
         letterSpacing="wide"
         maxW="full"
-        pb={5}
+        pb={3}
         noOfLines={1}
         wordBreak="break-all"
       >
         Records
       </Text>
       <HStack>
-        <GuildIconCard
-          orientation={"col"}
+        <ScoreBoard
           text={easy ?? "-"}
           iconName={"10.svg"}
           iconBgColor={GameDifficultColor.easy}
           bgColorRanges={600}
         />
-        <GuildIconCard
-          orientation={"col"}
+        <ScoreBoard
           text={medium ?? "-"}
           iconName={"36.svg"}
           iconBgColor={GameDifficultColor.medium}
           bgColorRanges={600}
         />
-        <GuildIconCard
-          orientation={"col"}
+        <ScoreBoard
           text={hard ?? "-"}
           iconName={"196.svg"}
           iconBgColor={GameDifficultColor.hard}

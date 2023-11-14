@@ -779,4 +779,9 @@ export enum GameDifficultIcon {
   "hard" = "196.svg",
 }
 
+export enum GameMode {
+  "guessByLogo",
+  "pairTheLogos",
+}
+
 export type GameRecords = Partial<Record<GameDifficulty, number>>

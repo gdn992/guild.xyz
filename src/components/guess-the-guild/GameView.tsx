@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
 import GameRecord from "./GameRecord"
-import GuildCardButton from "./GuildCardButton"
-import { HStack, VStack } from "@chakra-ui/react"
+import { HStack, Spinner, Text, VStack } from "@chakra-ui/react"
 import Button from "../common/Button"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
+import IconButton from "./IconButton"
+import GameStats from "./GameStats"
+import GameSelector from "./GameSelector"
 
 interface Props {
   selectedDifficult: GameDifficulty
@@ -12,9 +14,10 @@ interface Props {
 }
 
 const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
-  const { isLoading, data } = useGetGuildsByDifficulty(selectedDifficult)
+  const { isLoading, guilds } = useGetGuildsByDifficulty(selectedDifficult)
 
-  const [rounds, setRounds] = useState<number>(0)
+  const [rounds, setRounds] = useState<number>(1)
+  const [scores, setScores] = useState<number>(0)
 
   const [openConfirmationDialog, setOpenConfirmationDialog] =
     useState<boolean>(false)
@@ -28,27 +31,48 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
   }
 
   return (
-    <VStack alignItems="start" gap={10}>
-      <HStack justifyContent={"space-between"}>
-        {selectedDifficult && (
-          <GuildCardButton
+    <>
+      <VStack alignItems="start" w="full" gap={10}>
+        <HStack justifyContent="space-between" w="full">
+          <GameStats scores={scores} rounds={rounds} />
+          <IconButton
             w={200}
             h={200}
+            iconSize={180}
             bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
             iconName={GameDifficultIcon[selectedDifficult]}
             iconBgColor={GameDifficultColor[selectedDifficult]}
             onClick={handleOnGoBack}
           />
-        )}
-        <GameRecord />
-      </HStack>
+          <GameRecord />
+        </HStack>
+        <VStack w="full" alignItems="start">
+          <Text
+            as="span"
+            fontFamily="display"
+            fontSize="2xl"
+            fontWeight="bold"
+            letterSpacing="wide"
+            maxW="full"
+            noOfLines={1}
+            wordBreak="break-all"
+          >
+            Select a game mode
+          </Text>
+          {isLoading ? (
+            <Spinner alignSelf="center" />
+          ) : (
+            <GameSelector guilds={guilds} />
+          )}
+        </VStack>
+      </VStack>
       {openConfirmationDialog && (
         <>
           <Button onClick={onGoBack}>ok</Button>
           <Button onClick={() => setOpenConfirmationDialog(false)}>stay</Button>
         </>
       )}
-    </VStack>
+    </>
   )
 }
 

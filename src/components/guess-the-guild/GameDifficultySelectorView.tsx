@@ -1,14 +1,15 @@
 import React from "react"
 import { HStack, Text, VStack } from "@chakra-ui/react"
-import GuildIconCard from "./GuildIconCard"
-import { GameDifficulty, GameDifficultColor, GameDifficultIcon } from "../../types"
+import IconButton from "./IconButton"
+import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
+import GameRecord from "./GameRecord"
 
 interface Props {
   onDifficultySelect: (mode: GameDifficulty) => void
 }
 
 const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => (
-  <VStack alignItems="start" gap={10}>
+  <VStack alignItems="start" gap={10} w={"full"}>
     <GameRecord />
     <VStack alignItems="start" w={"full"}>
       <Text
@@ -24,21 +25,21 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
         Select a difficulty
       </Text>
       <HStack spacing={5} w={"full"}>
-        <GuildCardButton
+        <IconButton
           text="Easy"
           iconName={GameDifficultIcon.easy}
           iconBgColor={GameDifficultColor.easy}
           onClick={() => onDifficultySelect("easy")}
           w={"full"}
         />
-        <GuildCardButton
+        <IconButton
           text="Medium"
           iconName={GameDifficultIcon.medium}
           iconBgColor={GameDifficultColor.medium}
           onClick={() => onDifficultySelect("medium")}
           w={"full"}
         />
-        <GuildCardButton
+        <IconButton
           text="Hard"
           iconName={GameDifficultIcon.hard}
           iconBgColor={GameDifficultColor.hard}
@@ -50,4 +51,4 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
   </VStack>
 )
 
-export default GameDifficultySelector
+export default GameDifficultySelectorView

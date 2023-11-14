@@ -27,5 +27,5 @@ export const useGetGuildsByDifficulty = (selectedDifficulty: GameDifficulty) => 
     return undefined
   }, [rawData, isLoading])
 
-  return { data, isLoading }
+  return { guilds: data, isLoading }
 }

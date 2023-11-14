@@ -1,6 +1,7 @@
-import { ColorMode } from "@chakra-ui/react"
+import { ColorMode, HTMLChakraProps } from "@chakra-ui/react"
 
-export const getClickableStyle = (colorMode: ColorMode) => ({
+export const getClickableStyle = (colorMode: ColorMode): HTMLChakraProps<"div"> => ({
+  cursor: "pointer",
   _before: {
     content: `""`,
     position: "absolute",
