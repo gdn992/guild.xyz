@@ -764,3 +764,19 @@ export type {
   WalletConnectConnectionData,
   WalletError,
 }
+
+export type GameDifficulty = "easy" | "medium" | "hard"
+
+export enum GameDifficultColor {
+  "easy" = "--chakra-colors-blue-600",
+  "medium" = "--chakra-colors-yellow-500",
+  "hard" = "--chakra-colors-red-900",
+}
+
+export enum GameDifficultIcon {
+  "easy" = "10.svg",
+  "medium" = "36.svg",
+  "hard" = "196.svg",
+}
+
+export type GameRecords = Partial<Record<GameDifficulty, number>>
