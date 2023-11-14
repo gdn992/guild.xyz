@@ -1,40 +1,47 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/common/Layout"
-import { useBreakpointValue, useColorModeValue } from "@chakra-ui/react"
+import GameRecord from "../components/guess-the-guild/GameRecord"
+import { useGetFancyLayoutStyleProps } from "../components/guess-the-guild/hooks/useGetFancyLayoutStyleProps"
+import { HStack, VStack } from "@chakra-ui/react"
+import { GameDifficulty, GameDifficultColor, GameDifficultIcon } from "../types"
+import GameDifficultySelector from "../components/guess-the-guild/GameDifficultySelector"
+import GuildIconCard from "../components/guess-the-guild/GuildIconCard"
 
 const GuessTheGuild = () => {
-  const bannerColor = useColorModeValue(
-    "var(--chakra-colors-gray-800)",
-    "whiteAlpha.200"
-  )
-  const bgColor = useColorModeValue("var(--chakra-colors-gray-800)", "#37373a") // dark color is from whiteAlpha.200, but without opacity so it can overlay the banner image
-  const bgLinearPercentage = useBreakpointValue({ base: "50%", sm: "55%" })
-  const bgOpacity = useColorModeValue(0.06, 0.1)
+  const fancyLayoutStyle = useGetFancyLayoutStyleProps()
+
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false)
+  const [selectedDifficult, setSelectedDifficult] = useState<GameDifficulty>()
+
+  const handleStartGame = (difficult: GameDifficulty) => {
+    setSelectedDifficult(difficult)
+  }
+  const handleChangeGameDifficult = () => {
+    setSelectedDifficult(undefined)
+  }
 
   return (
-    <Layout
-      title="Guess the guild"
-      background={bannerColor}
-      backgroundProps={{
-        opacity: 1,
-        _before: {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          bg: `linear-gradient(to top right, ${bgColor} ${bgLinearPercentage}, transparent), url('/banner.png ')`,
-          bgSize: { base: "auto 100%", sm: "auto 115%" },
-          bgRepeat: "no-repeat",
-          bgPosition: "top 10px right 0px",
-          opacity: bgOpacity,
-        },
-      }}
-      backgroundOffset={47}
-      textColor="white"
-    >
-      guess the guild
+    <Layout title="Guess the guild" {...fancyLayoutStyle}>
+      <VStack alignItems="start" gap={10}>
+        <HStack justifyContent={"space-between"}>
+          {selectedDifficult && (
+            <GuildIconCard
+              w={200}
+              h={200}
+              bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
+              iconName={GameDifficultIcon[selectedDifficult]}
+              iconBgColor={GameDifficultColor[selectedDifficult]}
+              onClick={handleChangeGameDifficult}
+            />
+          )}
+          <GameRecord />
+        </HStack>
+        {selectedDifficult ? (
+          <></>
+        ) : (
+          <GameDifficultySelector onDifficultySelect={handleStartGame} />
+        )}
+      </VStack>
     </Layout>
   )
 }
