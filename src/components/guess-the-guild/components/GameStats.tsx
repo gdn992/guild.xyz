@@ -1,5 +1,5 @@
 import React from "react"
-import Card from "../common/Card"
+import Card from "../../common/Card"
 import { HStack, Text, useColorMode } from "@chakra-ui/react"
 import ScoreBoard from "./ScoreBoard"
 

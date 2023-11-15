@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
-import GameRecord from "./GameRecord"
+import GameRecord from "./components/GameRecord"
 import { HStack, Spinner, Text, VStack } from "@chakra-ui/react"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
-import IconButton from "./IconButton"
-import GameStats from "./GameStats"
-import GameSelector from "./GameSelector"
-import NavigationBackAlert from "./NavigationBackAlert"
+import IconButton from "./components/IconButton"
+import GameStats from "./components/GameStats"
+import GameSelector from "./components/GameSelector"
+import NavigationBackAlert from "./components/NavigationBackAlert"
 
 interface Props {
   selectedDifficult: GameDifficulty

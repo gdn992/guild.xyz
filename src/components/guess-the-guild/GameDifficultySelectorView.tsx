@@ -1,8 +1,8 @@
 import React from "react"
 import { HStack, Text, VStack } from "@chakra-ui/react"
-import IconButton from "./IconButton"
+import IconButton from "./components/IconButton"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
-import GameRecord from "./GameRecord"
+import GameRecord from "./components/GameRecord"
 
 interface Props {
   onDifficultySelect: (mode: GameDifficulty) => void

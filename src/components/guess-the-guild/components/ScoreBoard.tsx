@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, ChakraProps, Img, Text, useColorMode } from "@chakra-ui/react"
-import Card, { CardProps } from "../common/Card"
+import Card, { CardProps } from "../../common/Card"
 
 interface Props extends CardProps {
   text: string | number

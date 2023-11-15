@@ -7,8 +7,8 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react"
-import Card, { CardProps } from "../common/Card"
-import { getClickableStyle } from "./utils/getClickableStyle"
+import Card, { CardProps } from "../../common/Card"
+import { getClickableStyle } from "../utils/getClickableStyle"
 
 interface Props extends CardProps {
   text?: string | number

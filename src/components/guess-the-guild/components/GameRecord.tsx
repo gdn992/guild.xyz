@@ -1,8 +1,8 @@
 import React from "react"
-import { useGameRecords } from "./hooks/useGameRecords"
-import Card from "../common/Card"
+import { useGameRecords } from "../hooks/useGameRecords"
+import Card from "../../common/Card"
 import { HStack, Text, useColorMode } from "@chakra-ui/react"
-import { GameDifficultColor } from "../../types"
+import { GameDifficultColor } from "../../../types"
 import ScoreBoard from "./ScoreBoard"
 
 const GameRecord: React.FC = () => {

@@ -8,7 +8,7 @@ import {
   AlertDialogOverlay,
   Img,
 } from "@chakra-ui/react"
-import Button from "../common/Button"
+import Button from "../../common/Button"
 
 interface INavigationBackAlertProps {
   open: boolean
