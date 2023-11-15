@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import Layout from "../components/common/Layout"
-import { useGetFancyLayoutStyleProps } from "../components/guess-the-guild/hooks/useGetFancyLayoutStyleProps"
-import GameView from "../components/guess-the-guild/GameView"
+import {
+  GameDifficultySelectorView,
+  GameView,
+  useGetFancyLayoutStyleProps,
+} from "../components/guess-the-guild"
 import { GameDifficulty } from "../types"
 import { VStack } from "@chakra-ui/react"
-import GameDifficultySelectorView from "../components/guess-the-guild/GameDifficultySelectorView"
 
 const GuessTheGuild = () => {
   const fancyLayoutStyle = useGetFancyLayoutStyleProps()

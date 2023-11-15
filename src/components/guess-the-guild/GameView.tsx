@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
 import GameRecord from "./GameRecord"
 import { HStack, Spinner, Text, VStack } from "@chakra-ui/react"
-import Button from "../common/Button"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
 import IconButton from "./IconButton"
 import GameStats from "./GameStats"
 import GameSelector from "./GameSelector"
+import NavigationBackAlert from "./NavigationBackAlert"
 
 interface Props {
   selectedDifficult: GameDifficulty
@@ -19,14 +19,14 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
   const [rounds, setRounds] = useState<number>(1)
   const [scores, setScores] = useState<number>(0)
 
-  const [openConfirmationDialog, setOpenConfirmationDialog] =
+  const [openNavigationBackAlert, setOpenNavigationBackAlert] =
     useState<boolean>(false)
 
   const handleOnGoBack = () => {
     if (0 === rounds) {
       onGoBack()
     } else {
-      setOpenConfirmationDialog(true)
+      setOpenNavigationBackAlert(true)
     }
   }
 
@@ -66,12 +66,12 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
           )}
         </VStack>
       </VStack>
-      {openConfirmationDialog && (
-        <>
-          <Button onClick={onGoBack}>ok</Button>
-          <Button onClick={() => setOpenConfirmationDialog(false)}>stay</Button>
-        </>
-      )}
+      <NavigationBackAlert
+        open={openNavigationBackAlert}
+        onNavigate={onGoBack}
+        onCloseModal={() => setOpenNavigationBackAlert(false)}
+        onStay={() => setOpenNavigationBackAlert(false)}
+      />
     </>
   )
 }
