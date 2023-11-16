@@ -27,7 +27,7 @@ const IconButton: React.FC<Props> = ({
   text,
   onClick,
   iconSize = "40px",
-  textPx,
+  textPx = 1,
   h = "64px",
   ...rest
 }) => {

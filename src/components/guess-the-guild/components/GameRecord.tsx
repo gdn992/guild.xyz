@@ -1,14 +1,14 @@
 import React from "react"
-import { useGameRecords } from "../hooks/useGameRecords"
 import Card from "../../common/Card"
 import { HStack, Text, useColorMode } from "@chakra-ui/react"
 import { GameDifficultColor } from "../../../types"
 import ScoreBoard from "./ScoreBoard"
+import { useGameRecordsContext } from "../contexts/useGameRecordsProvider"
 
 const GameRecord: React.FC = () => {
   const {
     records: { easy, medium, hard },
-  } = useGameRecords()
+  } = useGameRecordsContext()
   const { colorMode } = useColorMode()
 
   return (
@@ -28,19 +28,19 @@ const GameRecord: React.FC = () => {
       </Text>
       <HStack>
         <ScoreBoard
-          text={easy ?? "-"}
+          text={easy === 0 ? "-" : easy}
           iconName={"10.svg"}
           iconBgColor={GameDifficultColor.easy}
           bgColorRanges={600}
         />
         <ScoreBoard
-          text={medium ?? "-"}
+          text={medium === 0 ? "-" : medium}
           iconName={"36.svg"}
           iconBgColor={GameDifficultColor.medium}
           bgColorRanges={600}
         />
         <ScoreBoard
-          text={hard ?? "-"}
+          text={hard === 0 ? "-" : hard}
           iconName={"196.svg"}
           iconBgColor={GameDifficultColor.hard}
           bgColorRanges={600}

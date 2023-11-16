@@ -7,6 +7,10 @@ import IconButton from "./components/IconButton"
 import GameStats from "./components/GameStats"
 import GameSelector from "./components/GameSelector"
 import NavigationBackAlert from "./components/NavigationBackAlert"
+import {
+  useGameStatsContext,
+  withGameStatsProvider,
+} from "./contexts/GameStatsProvider"
 
 interface Props {
   selectedDifficult: GameDifficulty
@@ -15,10 +19,7 @@ interface Props {
 
 const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
   const { isLoading, guilds } = useGetGuildsByDifficulty(selectedDifficult)
-
-  const [rounds, setRounds] = useState<number>(1)
-  const [scores, setScores] = useState<number>(0)
-
+  const { scores, rounds } = useGameStatsContext()
   const [openNavigationBackAlert, setOpenNavigationBackAlert] =
     useState<boolean>(false)
 
@@ -76,4 +77,4 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
   )
 }
 
-export default GameView
+export default withGameStatsProvider(GameView)

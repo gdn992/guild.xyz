@@ -767,6 +767,13 @@ export type {
 
 export type GameDifficulty = "easy" | "medium" | "hard"
 
+export type GameRecords = Partial<Record<GameDifficulty, number>>
+
+export interface GameStats {
+  rounds: number
+  scores: number
+}
+
 export enum GameDifficultColor {
   "easy" = "--chakra-colors-blue-600",
   "medium" = "--chakra-colors-yellow-500",
@@ -783,5 +790,3 @@ export enum GameMode {
   "guessByLogo",
   "pairTheLogos",
 }
-
-export type GameRecords = Partial<Record<GameDifficulty, number>>

@@ -7,6 +7,7 @@ import {
 } from "../components/guess-the-guild"
 import { GameDifficulty } from "../types"
 import { VStack } from "@chakra-ui/react"
+import { GameRecordsProvider } from "../components/guess-the-guild/contexts/useGameRecordsProvider"
 
 const GuessTheGuild = () => {
   const fancyLayoutStyle = useGetFancyLayoutStyleProps()
@@ -22,18 +23,20 @@ const GuessTheGuild = () => {
   }
 
   return (
-    <Layout title="Guess the guild" {...fancyLayoutStyle}>
-      <VStack alignItems="start" gap={10}>
-        {selectedDifficult ? (
-          <GameView
-            selectedDifficult={selectedDifficult}
-            onGoBack={handleOnGoBack}
-          />
-        ) : (
-          <GameDifficultySelectorView onDifficultySelect={handleStartGame} />
-        )}
-      </VStack>
-    </Layout>
+    <GameRecordsProvider difficulty={selectedDifficult}>
+      <Layout title="Guess the guild" {...fancyLayoutStyle}>
+        <VStack alignItems="start" gap={10}>
+          {selectedDifficult ? (
+            <GameView
+              selectedDifficult={selectedDifficult}
+              onGoBack={handleOnGoBack}
+            />
+          ) : (
+            <GameDifficultySelectorView onDifficultySelect={handleStartGame} />
+          )}
+        </VStack>
+      </Layout>
+    </GameRecordsProvider>
   )
 }
 
