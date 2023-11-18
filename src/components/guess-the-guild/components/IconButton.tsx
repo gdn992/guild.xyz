@@ -38,6 +38,7 @@ const IconButton: React.FC<Props> = ({
       role="group"
       position="relative"
       bg={colorMode === "light" ? "gray.100" : `gray.${bgColorRanges}`}
+      shadow={"xl"}
       justifyContent="center"
       alignItems="center"
       flexDirection="row"
@@ -48,6 +49,8 @@ const IconButton: React.FC<Props> = ({
     >
       <Box
         h={h}
+        rounded={"2xl"}
+        shadow={"xl"}
         w={h}
         flex={"none"}
         bgColor={`var(${iconBgColor})`}

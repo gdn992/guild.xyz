@@ -9,6 +9,7 @@ import {
   Img,
 } from "@chakra-ui/react"
 import Button from "../../common/Button"
+import FancyText from "./FancyText"
 
 interface INavigationBackAlertProps {
   open: boolean
@@ -51,8 +52,10 @@ const NavigationBackAlert: React.FC<INavigationBackAlertProps> = ({
             />
           </AlertDialogHeader>
           <AlertDialogBody>
-            Do you want to navigate? You are in a unfinished game, if you want to
-            change the difficulty, the earned point will be lost.
+            <FancyText fontSize={14}>
+              Do you want to navigate? You are in an unfinished game. If you choose
+              to change the difficulty, any earned points will be lost.
+            </FancyText>
           </AlertDialogBody>
           <AlertDialogFooter gap={3}>
             <Button colorScheme="red" onClick={onNavigate} ml={3}>

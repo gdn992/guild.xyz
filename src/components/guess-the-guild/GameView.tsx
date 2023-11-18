@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
 import GameRecord from "./components/GameRecord"
-import { HStack, Spinner, Text, VStack } from "@chakra-ui/react"
+import { HStack, Spinner, VStack } from "@chakra-ui/react"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
 import IconButton from "./components/IconButton"
 import GameStats from "./components/GameStats"
@@ -11,6 +11,7 @@ import {
   useGameStatsContext,
   withGameStatsProvider,
 } from "./contexts/GameStatsProvider"
+import FancyText from "./components/FancyText"
 
 interface Props {
   selectedDifficult: GameDifficulty
@@ -48,18 +49,7 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
           <GameRecord />
         </HStack>
         <VStack w="full" alignItems="start">
-          <Text
-            as="span"
-            fontFamily="display"
-            fontSize="2xl"
-            fontWeight="bold"
-            letterSpacing="wide"
-            maxW="full"
-            noOfLines={1}
-            wordBreak="break-all"
-          >
-            Select a game mode
-          </Text>
+          <FancyText fontWeight={"bold"}>Select a game mode</FancyText>
           {isLoading ? (
             <Spinner alignSelf="center" />
           ) : (

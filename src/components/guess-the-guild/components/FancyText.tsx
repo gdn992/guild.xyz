@@ -9,10 +9,8 @@ const FancyText: React.FC<PropsWithChildren<HTMLChakraProps<"p">>> = ({
     as="span"
     fontFamily="display"
     fontSize="2xl"
-    fontWeight="bold"
     letterSpacing="wide"
     maxW="full"
-    noOfLines={1}
     wordBreak="break-all"
     {...rest}
   >
