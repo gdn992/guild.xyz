@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from "react"
-import { GameStats } from "../../../types"
+
+import { GameStats } from "../types"
 
 interface GameStatsCallbacks {
   roundWon: (pointEarned: number) => void

@@ -1,9 +1,6 @@
 import React, { useState } from "react"
-import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../../types"
-import GameRecord from "./components/GameRecord"
-import { HStack, Spinner, VStack } from "@chakra-ui/react"
+import { Box, Spinner, VStack } from "@chakra-ui/react"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
-import IconButton from "./components/IconButton"
 import GameStats from "./components/GameStats"
 import GameSelector from "./components/GameSelector"
 import NavigationBackAlert from "./components/NavigationBackAlert"
@@ -12,6 +9,7 @@ import {
   withGameStatsProvider,
 } from "./contexts/GameStatsProvider"
 import FancyText from "./components/FancyText"
+import { GameDifficulty } from "./types"
 
 interface Props {
   selectedDifficult: GameDifficulty
@@ -35,27 +33,29 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
   return (
     <>
       <VStack alignItems="start" w="full" gap={10}>
-        <HStack justifyContent="space-between" w="full">
-          <GameStats scores={scores} rounds={rounds} />
-          <IconButton
-            w={200}
-            h={200}
-            iconSize={180}
-            bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
-            iconName={GameDifficultIcon[selectedDifficult]}
-            iconBgColor={GameDifficultColor[selectedDifficult]}
-            onClick={handleOnGoBack}
+        <Box
+          w="full"
+          display={"flex"}
+          gap={7}
+          flexDir={{ base: "column", md: "row" }}
+        >
+          <GameStats
+            selectedDifficult={selectedDifficult}
+            scores={scores}
+            rounds={rounds}
+            onGoBack={handleOnGoBack}
           />
-          <GameRecord />
-        </HStack>
-        <VStack w="full" alignItems="start">
-          <FancyText fontWeight={"bold"}>Select a game mode</FancyText>
-          {isLoading ? (
-            <Spinner alignSelf="center" />
-          ) : (
-            <GameSelector guilds={guilds} />
-          )}
-        </VStack>
+          <VStack w="full" alignItems="start">
+            <FancyText fontWeight={"bold"} color={{ md: "white" }}>
+              Select a game mode
+            </FancyText>
+            {isLoading ? (
+              <Spinner alignSelf="center" />
+            ) : (
+              <GameSelector guilds={guilds} />
+            )}
+          </VStack>
+        </Box>
       </VStack>
       <NavigationBackAlert
         open={openNavigationBackAlert}

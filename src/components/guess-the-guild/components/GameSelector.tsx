@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import { HStack } from "@chakra-ui/react"
 import IconButton from "./IconButton"
-import { GameDifficultColor, GameMode, GuildBase } from "../../../types"
+import { GuildBase } from "../../../types"
 import PairTheLogos from "../games/PairTheLogos"
 import GuessByLogo from "../games/GuessByLogo"
+import { GameDifficultColor, GameMode } from "../types"
 
 interface IGameSelectorProps {
   guilds: GuildBase[]
@@ -14,20 +15,18 @@ const GameSelector: React.FC<IGameSelectorProps> = ({ guilds }) => {
 
   return (
     <>
-      <HStack w="full" spacing={5} wrap="wrap">
+      <HStack spacing={5} wrap="wrap">
         <IconButton
           text="Guess the name"
-          iconName="/136.svg"
+          Icon="/136.svg"
           iconBgColor={GameDifficultColor.medium}
           onClick={() => setSelectedGameMode(GameMode.guessByLogo)}
-          w={300}
         />
         <IconButton
           text="Pair the logos"
-          iconName="/132.svg"
+          Icon="/132.svg"
           iconBgColor={GameDifficultColor.medium}
           onClick={() => setSelectedGameMode(GameMode.pairTheLogos)}
-          w={300}
         />
       </HStack>
       <GuessByLogo

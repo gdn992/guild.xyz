@@ -1,6 +1,7 @@
-import { GameDifficulty, GuildBase } from "../../../types"
+import { GuildBase } from "../../../types"
 import useSWR from "swr"
 import { useMemo } from "react"
+import { GameDifficulty } from "../types"
 
 export const useGetGuildsByDifficulty = (selectedDifficulty: GameDifficulty) => {
   const limit =

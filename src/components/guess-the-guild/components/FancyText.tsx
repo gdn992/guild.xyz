@@ -11,7 +11,6 @@ const FancyText: React.FC<PropsWithChildren<HTMLChakraProps<"p">>> = ({
     fontSize="2xl"
     letterSpacing="wide"
     maxW="full"
-    wordBreak="break-all"
     {...rest}
   >
     {children}

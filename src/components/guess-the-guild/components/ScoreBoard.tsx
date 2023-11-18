@@ -1,54 +1,35 @@
-import React from "react"
-import { Box, ChakraProps, Img, Text, useColorMode } from "@chakra-ui/react"
+import React, { ReactNode } from "react"
+import { Box, Img, useColorMode } from "@chakra-ui/react"
 import Card, { CardProps } from "../../common/Card"
+import FancyText from "./FancyText"
 
 interface Props extends CardProps {
   text: string | number
-  iconName: string
-  iconBgColor: ChakraProps["bgColor"]
+  Icon: string | ReactNode
   bgColorRanges?: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 }
 
-const ScoreBoard: React.FC<Props> = ({
-  iconName,
-  iconBgColor,
-  bgColorRanges = 700,
-  text,
-  ...rest
-}) => {
+const ScoreBoard: React.FC<Props> = ({ Icon, text, bgColorRanges, ...rest }) => {
   const { colorMode } = useColorMode()
-
   return (
     <Card
       role="group"
       position="relative"
-      bg={colorMode === "light" ? "gray.100" : `gray.${bgColorRanges}`}
-      w={64}
       h={128}
+      bg={colorMode === "light" ? "gray.100" : `gray.${bgColorRanges}`}
       {...rest}
     >
-      <Box
-        flex={1}
-        bgColor={`var(${iconBgColor})`}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Img src={`/guildLogos/${iconName}`} w="40px" h="40px" />
+      <Box p={2} flex={1} display="flex" alignItems="center" justifyContent="center">
+        {typeof Icon === "string" ? (
+          <Img src={`/guildLogos/${Icon}`} w="40px" h="40px" />
+        ) : (
+          Icon
+        )}
       </Box>
       <Box flex={1} display="flex" justifyContent="center" alignItems="center">
-        <Text
-          as="span"
-          fontFamily="display"
-          fontSize="lg"
-          fontWeight="bold"
-          letterSpacing="wide"
-          maxW="full"
-          noOfLines={1}
-          wordBreak="break-all"
-        >
+        <FancyText fontSize="lg" fontWeight="bold">
           {text}
-        </Text>
+        </FancyText>
       </Box>
     </Card>
   )

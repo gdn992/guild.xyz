@@ -1,5 +1,4 @@
 import useLocalStorage from "../../../hooks/useLocalStorage"
-import { GameDifficulty, GameRecords } from "../../../types"
 import React, {
   createContext,
   PropsWithChildren,
@@ -7,6 +6,7 @@ import React, {
   useContext,
 } from "react"
 import useJsConfetti from "../../create-guild/hooks/useJsConfetti"
+import { GameDifficulty, GameRecords } from "../types"
 
 export const GAME_RECORDS_STORAGE_KEY = "guessTheGuild.records"
 
