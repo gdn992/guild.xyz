@@ -3,7 +3,7 @@ import useWeb3ConnectionManager from "components/_app/Web3ConnectionManager/hook
 import Button from "components/common/Button"
 import Card from "components/common/Card"
 import LinkButton from "components/common/LinkButton"
-import GuildCard, { GuildSkeletonCard } from "components/explorer/GuildCard"
+import GuildCardLink, { GuildSkeletonCard } from "components/explorer/GuildCard"
 import GuildCardsGrid from "components/explorer/GuildCardsGrid"
 import useSWRWithOptionalAuth from "hooks/useSWRWithOptionalAuth"
 import { Plus, Wallet } from "phosphor-react"
@@ -64,7 +64,7 @@ const YourGuilds = forwardRef((_, ref: any) => {
       ) : usersGuilds?.length ? (
         <GuildCardsGrid>
           {usersGuilds.map((guild) => (
-            <GuildCard guildData={guild} key={guild.urlName} />
+            <GuildCardLink guildData={guild} key={guild.urlName} />
           ))}
         </GuildCardsGrid>
       ) : (
