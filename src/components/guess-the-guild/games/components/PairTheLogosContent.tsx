@@ -1,8 +1,5 @@
 import React, { useState } from "react"
 import { GuildBase } from "../../../../types"
-import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd"
-import GuildCardsDragDrop from "./GuildCardsDragDrop"
-import GuildLogosDragDrop from "./GuildLogosDragDrop"
 
 interface IPairTheLogosContentProps {
   selectedGuilds: GuildBase[]
@@ -49,50 +46,20 @@ const PairTheLogosContent: React.FC<IPairTheLogosContentProps> = ({
       return copy
     })
   }
-  const getGuildIndex = (droppableId: string) =>
-    Number.parseInt(droppableId.split(".")[1])
 
-  const handleDragEnd: OnDragEndResponder = (result) => {
-    if (result.destination === null) return
-    const source = result.source
-    const destination = result.destination
-
-    const droppedItem = logos[source.index]
-
-    if (source.droppableId === "LogoList") {
-      if (destination.droppableId === "LogoList") {
       } else {
-        // Guild.[index]
-        const guildIndex = getGuildIndex(destination.droppableId)
-        guilds[guildIndex].imageUrl = droppedItem
-        logos.splice(source.index, 1)
       }
     } else {
-      // Guild.[index]
-      const sourceIndex = getGuildIndex(source.droppableId)
-      if (destination.droppableId === "LogoList") {
       } else {
-        //Guild.[index]
-        const destinationIndex = getGuildIndex(destination.droppableId)
-        changeLogoBetweenGuilds(sourceIndex, destinationIndex)
       }
     }
-    console.log(
-      "%c PairTheLogosContent.tsx: result",
-      "background-image: linear-gradient(red 33.33%, yellow 33.33%, yellow 66.66%, green 66.66%); padding:20px; color: black; font-size:20px",
-      result
-    )
   }
 
   return (
-    <DragDropContext
-      onDragEnd={handleDragEnd}
-      enableDefaultSensors={true}
-      onDragUpdate={console.log}
-    >
       <GuildLogosDragDrop logos={logos} droppableId={"LogoList"} />
       <GuildCardsDragDrop guilds={guilds} />
-    </DragDropContext>
+    <VStack gap={3} w={"full"}>
+    </VStack>
   )
 }
 
