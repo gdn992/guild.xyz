@@ -27,7 +27,8 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
   const { scores, roundWon, roundLose } = useGameStatsContext()
   const { updateRecord } = useGameRecordsContext()
 
-  const { selectedGuilds, theChosenOne, reGenerate } = useGetGameQuestion(guilds)
+  const { selectedRandomGuilds, theChosenOne, reGenerate } =
+    useGetGameQuestion(guilds)
   const [answer, setAnswer] = useState<GuildBase["id"]>()
   const [newRecord, setNewRecord] = useState<number>()
 
@@ -35,8 +36,8 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
     setAnswer(id)
     if (id === theChosenOne.id) roundWon(1)
     else {
-      const valami = updateRecord(scores)
-      setNewRecord(valami)
+      const record = updateRecord(scores)
+      setNewRecord(record)
       roundLose()
     }
   }
@@ -58,7 +59,7 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
 
   return (
     <Modal
-      isOpen={Boolean(isOpen && selectedGuilds)}
+      isOpen={Boolean(isOpen && selectedRandomGuilds)}
       onClose={handleCloseModal}
       scrollBehavior="inside"
       colorScheme={"dark"}
@@ -79,7 +80,7 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
             answer={answer}
             onAnswer={handleAnswer}
             theChosenOne={theChosenOne}
-            selectedGuilds={selectedGuilds}
+            selectedGuilds={selectedRandomGuilds}
           />
         </ModalBody>
         {answer && (

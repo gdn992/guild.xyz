@@ -27,5 +27,5 @@ export const useGetGameQuestion = (guilds: GuildBase[]) => {
     reGenerateTheQuestion(new Date())
   }, [])
 
-  return { selectedGuilds, theChosenOne, reGenerate }
+  return { selectedRandomGuilds: selectedGuilds, theChosenOne, reGenerate }
 }

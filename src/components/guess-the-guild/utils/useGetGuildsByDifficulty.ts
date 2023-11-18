@@ -22,7 +22,7 @@ export const useGetGuildsByDifficulty = (selectedDifficulty: GameDifficulty) => 
 
   const data = useMemo(() => {
     if (!isLoading) {
-      return rawData.filter((value) => value.imageUrl)
+      return rawData.filter(({ imageUrl }) => imageUrl)
     }
     return undefined
   }, [rawData, isLoading])

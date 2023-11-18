@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
 } from "react"
+import useJsConfetti from "../../create-guild/hooks/useJsConfetti"
 
 export const GAME_RECORDS_STORAGE_KEY = "guessTheGuild.records"
 
@@ -31,6 +32,8 @@ export const GameRecordsProvider: React.FC<PropsWithChildren<Props>> = ({
   children,
   difficulty,
 }) => {
+  const triggerConfetti = useJsConfetti()
+
   const [records, setValue] = useLocalStorage<GameRecords>(
     GAME_RECORDS_STORAGE_KEY,
     {
@@ -47,22 +50,12 @@ export const GameRecordsProvider: React.FC<PropsWithChildren<Props>> = ({
           ...records,
           [difficulty]: value,
         })
-        console.log(
-          "%c useGameRecordsProvider.tsx: value",
-          "background-image: linear-gradient(red 33.33%, yellow 33.33%, yellow 66.66%, green 66.66%); padding:20px; color: black; font-size:20px",
-          value
-        )
+        triggerConfetti()
         return value
       }
       return undefined
     },
     [difficulty, records, setValue]
-  )
-
-  console.log(
-    "%c useGameRecordsProvider.ts: records",
-    "background-image: linear-gradient(white 33.33%, black 33.33%, black 66.66%, white 66.66%); padding:20px; color: black; font-size:20px",
-    records
   )
 
   return (

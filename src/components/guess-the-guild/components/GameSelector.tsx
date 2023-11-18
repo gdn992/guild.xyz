@@ -37,7 +37,7 @@ const GameSelector: React.FC<IGameSelectorProps> = ({ guilds }) => {
       />
       <PairTheLogos
         isOpen={selectedGameMode === GameMode.pairTheLogos}
-        guilds={guilds}
+        initialGuilds={guilds}
         onClose={() => setSelectedGameMode(undefined)}
       />
     </>
