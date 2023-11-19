@@ -1,6 +1,6 @@
 import React from "react"
 import Card from "../../common/Card"
-import { HStack, Tag, TagLabel, useColorMode, VStack } from "@chakra-ui/react"
+import { HStack, useColorMode } from "@chakra-ui/react"
 import ScoreBoard from "./ScoreBoard"
 import IconButton from "./IconButton"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../types"

@@ -50,13 +50,8 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
     setAnswer(undefined)
     setNewRecord(undefined)
   }
-  const handleDifferentGame = () => {
-    handleResetGame()
-    handleCloseModal()
-  }
 
   const handleCloseModal = () => {
-    handleResetGame()
     onClose()
   }
 

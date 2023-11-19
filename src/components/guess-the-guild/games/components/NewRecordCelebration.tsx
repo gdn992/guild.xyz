@@ -1,4 +1,4 @@
-import { Box, HStack, VStack } from "@chakra-ui/react"
+import { HStack, VStack } from "@chakra-ui/react"
 import FancyText from "../../components/FancyText"
 import React from "react"
 import { Trophy } from "phosphor-react"

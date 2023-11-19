@@ -39,7 +39,8 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
               key={difficulty}
               iconSize={"65px"}
               maxW={{ sm: 280 }}
-              text={difficulty.toUpperCase()}
+              text={difficulty}
+              textTransform="capitalize"
               subText={
                 <Box display={"flex"} gap={1}>
                   <FancyText fontSize={"sm"} noOfLines={1}>

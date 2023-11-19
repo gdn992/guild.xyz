@@ -11,7 +11,6 @@ import {
   Text,
 } from "@chakra-ui/react"
 import { GuildBase } from "../../../types"
-import { useGetGameQuestion } from "./utils/useGetGameQuestion"
 import { useGameStatsContext } from "../contexts/GameStatsProvider"
 import { useGameRecordsContext } from "../contexts/useGameRecordsProvider"
 import { NewRecordCelebration } from "./components/NewRecordCelebration"
@@ -19,17 +18,20 @@ import PairTheLogosContent from "./components/PairTheLogosContent"
 import PairGameResultContent from "./components/PairGameResultContent"
 import ModalButton from "../../common/ModalButton"
 import { ArrowsClockwise } from "phosphor-react"
+import { useGetPairTheLogosQuestion } from "./utils/useGetPairTheLogosQuestion"
+
+export interface ComparisonValue {
+  isThisGood: boolean
+  originalGuild: GuildBase
+  answeredGuild: GuildBase
+}
 
 interface IPairTheLogosProps {
   isOpen: boolean
   onClose: () => void
   initialGuilds: GuildBase[]
 }
-export interface ComparisonValue {
-  isThisGood: boolean
-  originalGuild: GuildBase
-  answeredGuild: GuildBase
-}
+
 const PairTheLogos: React.FC<IPairTheLogosProps> = ({
   isOpen,
   onClose,
@@ -39,48 +41,42 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
 
   const { scores, roundWon, roundLose } = useGameStatsContext()
   const { updateRecord } = useGameRecordsContext()
+  const [newRecord, setNewRecord] = useState<number>()
 
-  const { selectedRandomGuilds, reGenerate } = useGetGameQuestion(initialGuilds)
+  const { guilds, setGuilds, logos, setLogos, answerGuilds, reGenerate } =
+    useGetPairTheLogosQuestion(initialGuilds)
 
   const [result, setResult] = useState<ComparisonValue[]>()
+  const [goodJob, setGoodJob] = useState<boolean>()
+
   const [isAllGuildFilledWithLogos, setIsAllGuildFilledWithLogos] =
     useState<boolean>(false)
-  const [guilds, setGuilds] = useState<GuildBase[]>()
-  const [logos, setLogos] = useState<string[]>()
-  const [goodJob, setGoodJob] = useState<boolean>()
-  useEffect(() => {
-    setGuilds(selectedRandomGuilds.map((guild) => ({ ...guild, imageUrl: "" })))
-    setLogos(
-      selectedRandomGuilds
-        .map((guild) => guild.imageUrl)
-        .sort(() => Math.random() - 0.5)
-    )
-  }, [selectedRandomGuilds])
-
-  const [newRecord, setNewRecord] = useState<number>()
 
   useEffect(() => {
     setIsAllGuildFilledWithLogos(
       !Boolean(guilds?.find((guild) => guild.imageUrl === ""))
     )
   }, [guilds])
+
   const handleCheckTheAnswers = () => {
-    let isThereMistakes = false
+    let isThereMistake = false
+
     const countedResult = guilds.map((guild, index) => {
-      const isThisGood = guild.imageUrl === selectedRandomGuilds[index].imageUrl
-      if (!isThisGood) isThereMistakes = true
+      const isThisGood = guild.imageUrl === answerGuilds[index].imageUrl
+      if (!isThisGood) isThereMistake = true
+
       return {
-        isThisGood: guild.imageUrl === selectedRandomGuilds[index].imageUrl,
-        originalGuild: selectedRandomGuilds[index],
+        isThisGood: guild.imageUrl === answerGuilds[index].imageUrl,
+        originalGuild: answerGuilds[index],
         answeredGuild: guild,
       }
     })
-    setGoodJob(!isThereMistakes)
+
+    setGoodJob(!isThereMistake)
     setResult(countedResult)
 
-    if (isThereMistakes) {
+    if (isThereMistake) {
       setNewRecord(updateRecord(scores))
-
       roundLose()
     } else roundWon(2)
   }
@@ -91,10 +87,6 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
     setNewRecord(undefined)
     setIsAllGuildFilledWithLogos(false)
   }
-  const handleDifferentGame = () => {
-    handleResetGame()
-    handleCloseModal()
-  }
 
   const handleCloseModal = () => {
     handleResetGame()
@@ -103,11 +95,10 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
 
   return (
     <Modal
-      isOpen={Boolean(isOpen && selectedRandomGuilds)}
+      isOpen={Boolean(isOpen && answerGuilds)}
       onClose={handleCloseModal}
       scrollBehavior="inside"
       size={"md"}
-      colorScheme={"dark"}
       initialFocusRef={modalContentRef}
     >
       <ModalOverlay />
@@ -121,7 +112,7 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
         </ModalHeader>
         <ModalBody>
           {newRecord && <NewRecordCelebration newRecord={newRecord} />}
-          {!result && selectedRandomGuilds && (
+          {!result && answerGuilds && (
             <PairTheLogosContent
               guilds={guilds}
               setGuilds={setGuilds}
@@ -142,14 +133,12 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
               Submit
             </ModalButton>
           ) : (
-            <>
-              <Button w={"full"} onClick={handleResetGame}>
-                <HStack>
-                  <ArrowsClockwise />
-                  <Text>New game</Text>
-                </HStack>
-              </Button>
-            </>
+            <Button w={"full"} onClick={handleResetGame}>
+              <HStack>
+                <ArrowsClockwise />
+                <Text>New game</Text>
+              </HStack>
+            </Button>
           )}
         </ModalFooter>
       </ModalContent>

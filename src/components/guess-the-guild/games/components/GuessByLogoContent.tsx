@@ -4,6 +4,7 @@ import GuildLogo from "../../../common/GuildLogo"
 import FancyText from "../../components/FancyText"
 import Button from "../../../common/Button"
 import { GuildBase } from "../../../../types"
+import Card from "../../../common/Card"
 
 interface Props {
   theChosenOne: GuildBase
@@ -29,20 +30,50 @@ export const GuessByLogoContent: React.FC<Props> = ({
         const isThisSelected = answer === guild.id
         const outlineColor = isThisTheChosenOne ? "green.400" : "red.400"
 
-        return (
-          <Button
-            key={guild.id}
-            w={"full"}
-            onClick={() => onAnswer(guild.id)}
-            isDisabled={answer !== undefined}
-            outlineOffset={"-3"}
-            outlineColor={
+        return answer ? (
+          <Card
+            h={"44px"}
+            bgColor={
               answer && (isThisTheChosenOne || isThisSelected)
                 ? outlineColor
                 : undefined
             }
+            alignItems={"center"}
+            justifyContent={"center"}
+            borderRadius={"xl"}
+            w={"full"}
           >
-            {guild.name}
+            <FancyText
+              px={3}
+              fontSize={"lg"}
+              fontWeight={"semibold"}
+              noOfLines={1}
+              wordBreak="break-all"
+            >
+              {guild.name}
+            </FancyText>
+          </Card>
+        ) : (
+          <Button
+            key={guild.id}
+            wordBreak={"break-all"}
+            noOfLines={1}
+            w={"100%"}
+            onClick={() => onAnswer(guild.id)}
+            outlineOffset={"-3"}
+            resize={"horizontal"}
+          >
+            <FancyText
+              as={"p"}
+              width={"280px"}
+              whiteSpace={"nowrap"}
+              overflow={"hidden"}
+              textOverflow={"ellipsis"}
+              fontSize={"lg"}
+              fontWeight={"semibold"}
+            >
+              {guild.name}
+            </FancyText>
           </Button>
         )
       })}

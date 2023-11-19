@@ -4,7 +4,7 @@ import { HStack } from "@chakra-ui/react"
 import ScoreBoard from "./ScoreBoard"
 import { useGameRecordsContext } from "../contexts/useGameRecordsProvider"
 import FancyText from "./FancyText"
-import { GameDifficultColor, GameDifficultIcon } from "../types"
+import { GameDifficultIcon } from "../types"
 
 const GameRecord: React.FC = () => {
   const {
