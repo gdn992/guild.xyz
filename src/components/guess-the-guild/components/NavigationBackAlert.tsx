@@ -43,11 +43,13 @@ const NavigationBackAlert: React.FC<INavigationBackAlertProps> = ({
           >
             <Img
               src={`/guildLogos/${Math.floor(Math.random() * 285)}.svg`}
+              h="40px"
               w="40px"
             />
             Change the difficulty
             <Img
               src={`/guildLogos/${Math.floor(Math.random() * 285)}.svg`}
+              h="40px"
               w="40px"
             />
           </AlertDialogHeader>

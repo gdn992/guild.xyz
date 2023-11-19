@@ -8,7 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  VStack,
+  Text,
 } from "@chakra-ui/react"
 import { GuildBase } from "../../../types"
 import { useGetGameQuestion } from "./utils/useGetGameQuestion"
@@ -16,15 +16,16 @@ import { useGameStatsContext } from "../contexts/GameStatsProvider"
 import { useGameRecordsContext } from "../contexts/useGameRecordsProvider"
 import { NewRecordCelebration } from "./components/NewRecordCelebration"
 import PairTheLogosContent from "./components/PairTheLogosContent"
-import { GuildCard } from "../../explorer/GuildCard"
-import GuildLogo from "../../common/GuildLogo"
+import PairGameResultContent from "./components/PairGameResultContent"
+import ModalButton from "../../common/ModalButton"
+import { ArrowsClockwise } from "phosphor-react"
 
 interface IPairTheLogosProps {
   isOpen: boolean
   onClose: () => void
   initialGuilds: GuildBase[]
 }
-interface ComparisonValue {
+export interface ComparisonValue {
   isThisGood: boolean
   originalGuild: GuildBase
   answeredGuild: GuildBase
@@ -49,7 +50,11 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
   const [goodJob, setGoodJob] = useState<boolean>()
   useEffect(() => {
     setGuilds(selectedRandomGuilds.map((guild) => ({ ...guild, imageUrl: "" })))
-    setLogos(selectedRandomGuilds.map((guild) => guild.imageUrl)) // todo randomize
+    setLogos(
+      selectedRandomGuilds
+        .map((guild) => guild.imageUrl)
+        .sort(() => Math.random() - 0.5)
+    )
   }, [selectedRandomGuilds])
 
   const [newRecord, setNewRecord] = useState<number>()
@@ -101,6 +106,7 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
       isOpen={Boolean(isOpen && selectedRandomGuilds)}
       onClose={handleCloseModal}
       scrollBehavior="inside"
+      size={"md"}
       colorScheme={"dark"}
       initialFocusRef={modalContentRef}
     >
@@ -123,45 +129,25 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
               setLogos={setLogos}
             />
           )}
-          {result && (
-            <VStack gap={2} alignItems={"start"} w={"full"}>
-              {result.map(
-                ({ answeredGuild, originalGuild, isThisGood }, index) =>
-                  !isThisGood && (
-                    <HStack key={answeredGuild.id} w={"full"}>
-                      {!isThisGood ? (
-                        <GuildLogo size={"48px"} imageUrl={originalGuild.imageUrl} />
-                      ) : null}
-                      <GuildCard
-                        px={3}
-                        py={3}
-                        guildData={answeredGuild}
-                        guildLogoProps={{
-                          outline: `2px dashed ${isThisGood ? "green" : "red"}`,
-                        }}
-                      />
-                    </HStack>
-                  )
-              )}
-            </VStack>
-          )}
+          {result && <PairGameResultContent result={result} />}
         </ModalBody>
         <ModalFooter gap={3}>
           {result === undefined ? (
-            <Button
+            <ModalButton
               onClick={handleCheckTheAnswers}
+              bgColor={"green.500"}
               isDisabled={!isAllGuildFilledWithLogos}
               w={"full"}
             >
               Submit
-            </Button>
+            </ModalButton>
           ) : (
             <>
-              <Button w={"full"} onClick={handleDifferentGame}>
-                different game
-              </Button>
               <Button w={"full"} onClick={handleResetGame}>
-                new game
+                <HStack>
+                  <ArrowsClockwise />
+                  <Text>New game</Text>
+                </HStack>
               </Button>
             </>
           )}

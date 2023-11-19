@@ -43,7 +43,7 @@ export const GameRecordsProvider: React.FC<PropsWithChildren<Props>> = ({
     },
     true
   )
-  const updateRecord = useCallback(
+  const checkThisRecord = useCallback(
     (value: number) => {
       if (records[difficulty] < value) {
         setValue({
@@ -51,15 +51,15 @@ export const GameRecordsProvider: React.FC<PropsWithChildren<Props>> = ({
           [difficulty]: value,
         })
         triggerConfetti()
-        return value
+        return value // this is a new record
       }
-      return undefined
+      return undefined // this is not record
     },
-    [difficulty, records, setValue]
+    [difficulty, records, setValue, triggerConfetti]
   )
 
   return (
-    <GameRecordsContext.Provider value={{ records, updateRecord }}>
+    <GameRecordsContext.Provider value={{ records, updateRecord: checkThisRecord }}>
       {children}
     </GameRecordsContext.Provider>
   )

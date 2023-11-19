@@ -16,7 +16,7 @@ interface Props extends CardProps {
   text?: string | number
   subText?: string | ReactNode
   Icon: string | ReactNode
-  iconBgColor: ChakraProps["bgColor"]
+  iconBgColor?: ChakraProps["bgColor"]
   bgColorRanges?: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
   iconSize?: HTMLChakraProps<"div">["h"]
   textPx?: HTMLChakraProps<"div">["px"]
@@ -26,7 +26,6 @@ interface Props extends CardProps {
 const IconButton: React.FC<Props> = ({
   Icon,
   iconBgColor,
-  bgColorRanges = 700,
   text,
   subText,
   onClick,
@@ -42,13 +41,12 @@ const IconButton: React.FC<Props> = ({
       bg={colorMode === "light" ? "white" : `gray.700`}
       shadow={"xl"}
       justifyContent="center"
-      alignItems="center"
       flexDirection="row"
       onClick={onClick}
       {...getClickableStyle(colorMode)}
       {...rest}
     >
-      <HStack w={"full"} gap={3}>
+      <HStack w={"full"} gap={3} alignItems={subText ? "start" : "center"}>
         <Box
           p={3}
           rounded={"2xl"}

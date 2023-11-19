@@ -2,11 +2,13 @@ import React, { useRef, useState } from "react"
 import Button from "../../common/Button"
 import { Modal } from "../../common/Modal"
 import {
+  HStack,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react"
 import { GuildBase } from "../../../types"
 import { useGetGameQuestion } from "./utils/useGetGameQuestion"
@@ -14,6 +16,7 @@ import { GuessByLogoContent } from "./components/GuessByLogoContent"
 import { useGameStatsContext } from "../contexts/GameStatsProvider"
 import { useGameRecordsContext } from "../contexts/useGameRecordsProvider"
 import { NewRecordCelebration } from "./components/NewRecordCelebration"
+import { ArrowsClockwise } from "phosphor-react"
 
 interface IGuessByLogoProps {
   isOpen: boolean
@@ -63,6 +66,7 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
       onClose={handleCloseModal}
       scrollBehavior="inside"
       colorScheme={"dark"}
+      size={"sm"}
       initialFocusRef={modalContentRef}
     >
       <ModalOverlay />
@@ -85,8 +89,12 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
         </ModalBody>
         {answer && (
           <ModalFooter gap={3}>
-            <Button onClick={handleDifferentGame}>different game</Button>
-            <Button onClick={handleResetGame}>new game</Button>
+            <Button w={"full"} onClick={handleResetGame}>
+              <HStack>
+                <ArrowsClockwise />
+                <Text>New game</Text>
+              </HStack>
+            </Button>
           </ModalFooter>
         )}
       </ModalContent>

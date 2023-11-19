@@ -1,6 +1,6 @@
 import React from "react"
 import Card from "../../common/Card"
-import { HStack, Tag, TagLabel, useColorMode } from "@chakra-ui/react"
+import { HStack, Tag, TagLabel, useColorMode, VStack } from "@chakra-ui/react"
 import ScoreBoard from "./ScoreBoard"
 import IconButton from "./IconButton"
 import { GameDifficultColor, GameDifficultIcon, GameDifficulty } from "../types"
@@ -28,7 +28,7 @@ const GameStats: React.FC<IGameStatsProps> = ({
   return (
     <Card
       p={3}
-      w={{ sm: 270 }}
+      w={{ sm: 320 }}
       bg={colorMode === "light" ? "gray.100" : "gray.700"}
       isFullWidthOnMobile
       flex={"none"}
@@ -41,49 +41,48 @@ const GameStats: React.FC<IGameStatsProps> = ({
         fontFamily="display"
         fontSize="s"
         fontWeight="bold"
-        w={{ sm: 270 }}
+        w={{ sm: 370 }}
         pb={3}
       >
         If you consider change the difficulty, just click this fancy colorful button.
       </FancyText>
-      <HStack justifyContent={"space-between"}>
+      <HStack justifyContent={"space-between"} alignItems={"start"}>
         <HStack>
           <ScoreBoard
             h={140}
+            bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
+            color={"white"}
+            text={records[selectedDifficult]}
+            Icon={<Trophy size={30} />}
+            bgColorRanges={600}
+          />
+          <IconButton
+            iconSize={140}
+            bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
+            Icon={<SelectedDifficultIcon color={"white"} size={40} />}
+            iconBgColor={GameDifficultColor[selectedDifficult]}
+            onClick={onGoBack}
+          />
+        </HStack>
+        <HStack>
+          <ScoreBoard
+            h={140}
+            bgColor={"blue.500"}
+            color={"white"}
             text={rounds}
             Icon={<Flag size={30} />}
             bgColorRanges={600}
           />
           <ScoreBoard
             h={140}
+            bgColor={"yellow.500"}
+            color={"white"}
             text={scores}
             Icon={<Coins size={30} />}
             bgColorRanges={600}
           />
         </HStack>
-        <IconButton
-          iconSize={140}
-          bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
-          Icon={<SelectedDifficultIcon color={"white"} size={40} />}
-          iconBgColor={GameDifficultColor[selectedDifficult]}
-          onClick={onGoBack}
-        />
       </HStack>
-      <FancyText fontFamily="display" fontSize="xs" fontWeight="bold" pt={3}>
-        <Tag
-          w={"full"}
-          py={1}
-          bgColor={`var(${GameDifficultColor[selectedDifficult]})`}
-          color={"white"}
-        >
-          <HStack gap={2}>
-            <Trophy size={20} />{" "}
-            <TagLabel fontWeight={"bold"}>
-              The record is: {records[selectedDifficult]}
-            </TagLabel>
-          </HStack>
-        </Tag>
-      </FancyText>
     </Card>
   )
 }

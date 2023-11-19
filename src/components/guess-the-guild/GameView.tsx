@@ -52,7 +52,7 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
             {isLoading ? (
               <Spinner alignSelf="center" />
             ) : (
-              <GameSelector guilds={guilds} />
+              <GameSelector guilds={guilds} selectedDifficult={selectedDifficult} />
             )}
           </VStack>
         </Box>

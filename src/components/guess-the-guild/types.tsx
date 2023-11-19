@@ -17,8 +17,8 @@ export const gameDifficultDescriptions: Record<GameDifficulty, string> = {
 }
 
 export enum GameDifficultColor {
-  "easy" = "--chakra-colors-blue-600",
-  "medium" = "--chakra-colors-yellow-500",
+  "easy" = "--chakra-colors-green-700",
+  "medium" = "--chakra-colors-yellow-600",
   "hard" = "--chakra-colors-red-900",
 }
 

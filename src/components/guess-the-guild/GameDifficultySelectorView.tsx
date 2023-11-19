@@ -1,5 +1,5 @@
 import React from "react"
-import { HStack, Tag, TagLabel, VStack } from "@chakra-ui/react"
+import { Box, HStack, VStack } from "@chakra-ui/react"
 import IconButton from "./components/IconButton"
 import {
   GameDifficultColor,
@@ -23,7 +23,14 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
       <FancyText fontSize="2xl" fontWeight="bold" noOfLines={1} color={"white"}>
         Select a difficulty
       </FancyText>
-      <HStack alignItems="start" w={"full"} spacing={5}>
+      <Box
+        display={"flex"}
+        alignItems="start"
+        w={"full"}
+        gap={5}
+        flexWrap={"wrap"}
+        flexDirection={{ md: "row" }}
+      >
         {Object.keys(records).map((difficulty: GameDifficulty) => {
           const DifficultyIcon = GameDifficultIcon[difficulty]
 
@@ -31,19 +38,22 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
             <IconButton
               key={difficulty}
               iconSize={"65px"}
-              maxW={300}
+              maxW={{ sm: 280 }}
               text={difficulty.toUpperCase()}
               subText={
-                <HStack>
-                  <FancyText fontSize={12} noOfLines={1}>
+                <Box display={"flex"} gap={1}>
+                  <FancyText fontSize={"sm"} noOfLines={1}>
                     {gameDifficultDescriptions[difficulty]}
                   </FancyText>
-                  <Tag py={1}>
-                    <HStack gap={2}>
-                      <Trophy size={20} /> <TagLabel>{records[difficulty]}</TagLabel>
-                    </HStack>
-                  </Tag>
-                </HStack>
+                  <HStack gap={2}>
+                    <Trophy
+                      size={25}
+                      weight={"fill"}
+                      color={`var(${GameDifficultColor[difficulty]})`}
+                    />
+                    <FancyText fontSize={"sm"}>{records[difficulty]}</FancyText>
+                  </HStack>
+                </Box>
               }
               Icon={<DifficultyIcon color={"white"} size={40} />}
               iconBgColor={GameDifficultColor[difficulty]}
@@ -52,7 +62,7 @@ const GameDifficultySelectorView: React.FC<Props> = ({ onDifficultySelect }) => 
             />
           )
         })}
-      </HStack>
+      </Box>
     </VStack>
   )
 }

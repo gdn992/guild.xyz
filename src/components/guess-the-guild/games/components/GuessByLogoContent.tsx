@@ -35,8 +35,12 @@ export const GuessByLogoContent: React.FC<Props> = ({
             w={"full"}
             onClick={() => onAnswer(guild.id)}
             isDisabled={answer !== undefined}
-            hidden={answer ? !isThisTheChosenOne && !isThisSelected : false}
-            outlineColor={answer ? outlineColor : undefined}
+            outlineOffset={"-3"}
+            outlineColor={
+              answer && (isThisTheChosenOne || isThisSelected)
+                ? outlineColor
+                : undefined
+            }
           >
             {guild.name}
           </Button>

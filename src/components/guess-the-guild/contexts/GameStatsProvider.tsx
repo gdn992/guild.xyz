@@ -43,7 +43,7 @@ const GameStatsProvider = ({ children }) => {
 }
 
 // todo add type to the props
-export const withGameStatsProvider = (WrappedComponent: React.FC) => (props) =>
+export const withGameStatsProvider = (WrappedComponent: React.FC) => (props: any) =>
   (
     <GameStatsProvider>
       <WrappedComponent {...props} />

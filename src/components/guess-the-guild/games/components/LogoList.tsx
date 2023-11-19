@@ -1,5 +1,5 @@
 import React from "react"
-import { Circle, HStack, HTMLChakraProps } from "@chakra-ui/react"
+import { Circle, HStack, HTMLChakraProps, useColorMode } from "@chakra-ui/react"
 import GuildLogo from "../../../common/GuildLogo"
 
 interface IGuildLogoListItemProps extends HTMLChakraProps<"div"> {
@@ -11,16 +11,23 @@ const LogoListItem: React.FC<IGuildLogoListItemProps> = ({
   logo,
   highlighted,
   ...rest
-}) => (
-  <Circle
-    size={"64px"}
-    outline={`${highlighted ? "3px" : "0"} solid`}
-    outlineColor={"white"}
-    {...rest}
-  >
-    <GuildLogo size={"64px"} imageUrl={logo} />
-  </Circle>
-)
+}) => {
+  const { colorMode } = useColorMode()
+
+  return (
+    <Circle
+      size={"64px"}
+      outline={`${highlighted ? "3px" : "0"} solid`}
+      mt={1}
+      mb={5}
+      outlineOffset={3}
+      outlineColor={colorMode === "light" ? "gray.800" : "white"}
+      {...rest}
+    >
+      <GuildLogo size={"64px"} imageUrl={logo} />
+    </Circle>
+  )
+}
 
 interface LogosProps {
   selectedLogoIndex: number

@@ -1,26 +1,18 @@
-import { Img, VStack } from "@chakra-ui/react"
-import Card from "../../../common/Card"
+import { Box, HStack, VStack } from "@chakra-ui/react"
 import FancyText from "../../components/FancyText"
 import React from "react"
+import { Trophy } from "phosphor-react"
 
 export const NewRecordCelebration = ({ newRecord }) => (
-  <VStack w={"full"} justifyContent={"space-evenly"} pb={10}>
-    <FancyText textColor={"yellow.500"} fontSize={20}>
-      But, Congratulation!
+  <VStack w={"full"} alignContent={"center"} pb={10}>
+    <FancyText fontSize={"md"} fontWeight={"bold"}>
+      But, Congratulation! There is a new record!
     </FancyText>
-    <Card
-      display={"flex"}
-      flexDirection={"row"}
-      gap={2}
-      p={3}
-      bgColor={"yellow.500"}
-      alignItems={"center"}
-    >
-      <Img src={"/guildLogos/260.svg"} boxSize="10" borderRadius={"full"} />
-      <FancyText fontSize={20}>{newRecord}</FancyText>
-    </Card>
-    <FancyText textColor={"yellow.500"} fontSize={20}>
-      There is a new record!
-    </FancyText>
+    <HStack>
+      <Trophy size={50} color="var(--chakra-colors-yellow-500)" />
+      <FancyText fontSize={20} color={"yellow.500"} fontWeight={"bold"}>
+        {newRecord}
+      </FancyText>
+    </HStack>
   </VStack>
 )
