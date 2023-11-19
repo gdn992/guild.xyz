@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Spinner, VStack } from "@chakra-ui/react"
+import { Box, Spinner, useColorMode, VStack } from "@chakra-ui/react"
 import { useGetGuildsByDifficulty } from "./utils/useGetGuildsByDifficulty"
 import GameStats from "./components/GameStats"
 import GameSelector from "./components/GameSelector"
@@ -17,6 +17,8 @@ interface Props {
 }
 
 const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
+  const { colorMode } = useColorMode()
+
   const { isLoading, guilds } = useGetGuildsByDifficulty(selectedDifficult)
   const { scores, rounds } = useGameStatsContext()
   const [openNavigationBackAlert, setOpenNavigationBackAlert] =
@@ -46,7 +48,13 @@ const GameView: React.FC<Props> = ({ onGoBack, selectedDifficult }) => {
             onGoBack={handleOnGoBack}
           />
           <VStack w="full" alignItems="start">
-            <FancyText fontWeight={"bold"} color={{ md: "white" }}>
+            <FancyText
+              fontWeight={"bold"}
+              color={{
+                md: "white",
+                xl: colorMode === "light" ? "gray.800" : "white",
+              }}
+            >
               Select a game mode
             </FancyText>
             {isLoading ? (

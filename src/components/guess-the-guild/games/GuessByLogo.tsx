@@ -60,20 +60,19 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
       isOpen={Boolean(isOpen && selectedRandomGuilds)}
       onClose={handleCloseModal}
       scrollBehavior="inside"
-      colorScheme={"dark"}
       size={"sm"}
       initialFocusRef={modalContentRef}
     >
       <ModalOverlay />
       <ModalContent ref={modalContentRef}>
-        <ModalHeader textAlign={"center"}>
+        <ModalHeader p={5} textAlign={"center"}>
           {answer
             ? answer === theChosenOne.id
               ? "Good job"
               : "Oops! Better luck next time."
             : "Guess the guild by the logo"}
         </ModalHeader>
-        <ModalBody>
+        <ModalBody pt={0} {...(answer ? { pb: 0 } : { pb: 6 })}>
           {newRecord && <NewRecordCelebration newRecord={newRecord} />}
           <GuessByLogoContent
             answer={answer}
@@ -83,7 +82,7 @@ const GuessByLogo: React.FC<IGuessByLogoProps> = ({ isOpen, onClose, guilds }) =
           />
         </ModalBody>
         {answer && (
-          <ModalFooter gap={3}>
+          <ModalFooter p={5} gap={3}>
             <Button w={"full"} onClick={handleResetGame}>
               <HStack>
                 <ArrowsClockwise />

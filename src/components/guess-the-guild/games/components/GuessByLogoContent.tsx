@@ -4,7 +4,7 @@ import GuildLogo from "../../../common/GuildLogo"
 import FancyText from "../../components/FancyText"
 import Button from "../../../common/Button"
 import { GuildBase } from "../../../../types"
-import Card from "../../../common/Card"
+import { GuildCard } from "../../../explorer/GuildCard"
 
 interface Props {
   theChosenOne: GuildBase
@@ -20,10 +20,20 @@ export const GuessByLogoContent: React.FC<Props> = ({
   onAnswer,
 }) => (
   <>
-    <VStack pb={3}>
-      {theChosenOne && <GuildLogo imageUrl={theChosenOne.imageUrl} size={"80px"} />}
-      <FancyText fontSize={12}>???</FancyText>
-    </VStack>
+    {answer ? null : (
+      <VStack
+        pb={3}
+        position={"sticky"}
+        top={0}
+        zIndex={"sticky"}
+        backgroundColor={"gray.700"}
+      >
+        {theChosenOne && (
+          <GuildLogo imageUrl={theChosenOne.imageUrl} size={"80px"} />
+        )}
+        <FancyText fontSize={"xs"}>???</FancyText>
+      </VStack>
+    )}
     <VStack spacing={2} alignItems="start">
       {selectedGuilds.map((guild) => {
         const isThisTheChosenOne = theChosenOne.id === guild.id
@@ -31,28 +41,15 @@ export const GuessByLogoContent: React.FC<Props> = ({
         const outlineColor = isThisTheChosenOne ? "green.400" : "red.400"
 
         return answer ? (
-          <Card
-            h={"44px"}
-            bgColor={
-              answer && (isThisTheChosenOne || isThisSelected)
-                ? outlineColor
-                : undefined
+          <GuildCard
+            px={{ base: 2, md: 3 }}
+            py={{ sm: 1, md: 2 }}
+            key={guild.id}
+            guildData={guild}
+            backgroundColor={
+              isThisTheChosenOne || isThisSelected ? outlineColor : undefined
             }
-            alignItems={"center"}
-            justifyContent={"center"}
-            borderRadius={"xl"}
-            w={"full"}
-          >
-            <FancyText
-              px={3}
-              fontSize={"lg"}
-              fontWeight={"semibold"}
-              noOfLines={1}
-              wordBreak="break-all"
-            >
-              {guild.name}
-            </FancyText>
-          </Card>
+          />
         ) : (
           <Button
             key={guild.id}
@@ -61,11 +58,10 @@ export const GuessByLogoContent: React.FC<Props> = ({
             w={"100%"}
             onClick={() => onAnswer(guild.id)}
             outlineOffset={"-3"}
-            resize={"horizontal"}
           >
             <FancyText
               as={"p"}
-              width={"280px"}
+              maxW={"280px"}
               whiteSpace={"nowrap"}
               overflow={"hidden"}
               textOverflow={"ellipsis"}

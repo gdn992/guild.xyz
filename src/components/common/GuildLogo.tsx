@@ -22,7 +22,7 @@ const GuildLogo = memo(
 
     return (
       <Circle
-        position="relative"
+        position="sticky"
         bgColor={colorMode === "light" ? "gray.700" : "gray.600"}
         size={size}
         overflow="hidden"
