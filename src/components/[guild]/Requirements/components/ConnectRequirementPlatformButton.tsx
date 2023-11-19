@@ -1,5 +1,5 @@
-import { ButtonProps, Icon } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import { Icon } from "@chakra-ui/react"
+import Button, { ButtonProps } from "components/common/Button"
 import { ConnectEmailButton } from "components/common/Layout/components/Account/components/AccountModal/components/SocialAccount/EmailAddress"
 import useUserPoapEligibility from "components/[guild]/claim-poap/hooks/useUserPoapEligibility"
 import useAccess from "components/[guild]/hooks/useAccess"

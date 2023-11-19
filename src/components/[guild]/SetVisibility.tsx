@@ -1,5 +1,4 @@
 import {
-  ButtonProps,
   Circle,
   HStack,
   IconButton,
@@ -15,7 +14,7 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import PulseMarker from "components/common/PulseMarker"
 import RadioSelect from "components/common/RadioSelect"
 import { Option } from "components/common/RadioSelect/RadioSelect"

@@ -1,5 +1,6 @@
 import {
   HStack,
+  HTMLChakraProps,
   SimpleGrid,
   Skeleton,
   SkeletonCircle,
@@ -11,7 +12,7 @@ import {
   Wrap,
 } from "@chakra-ui/react"
 import DisplayCard from "components/common/DisplayCard"
-import GuildLogo from "components/common/GuildLogo"
+import GuildLogo, { GuildLogoProps } from "components/common/GuildLogo"
 import Link from "components/common/Link"
 import VerifiedIcon from "components/common/VerifiedIcon"
 import image from "next/image"
@@ -19,11 +20,16 @@ import { Users } from "phosphor-react"
 import { GuildBase } from "types"
 import pluralize from "utils/pluralize"
 
-type Props = {
+interface Props extends HTMLChakraProps<"div"> {
   guildData: GuildBase
+  guildLogoProps?: GuildLogoProps
 }
 
-const GuildCard = ({ guildData }: Props): JSX.Element => (
+const GuildCardLink = ({
+  guildData,
+  guildLogoProps,
+  ...rest
+}: Props): JSX.Element => (
   <Link
     href={`/${guildData.urlName}`}
     prefetch={false}
@@ -32,45 +38,50 @@ const GuildCard = ({ guildData }: Props): JSX.Element => (
     w="full"
     h="full"
   >
-    <DisplayCard>
-      <SimpleGrid
-        templateColumns={image ? "3rem calc(100% - 5.25rem)" : "1fr"}
-        gap={4}
-        alignItems="center"
-      >
-        {image && <GuildLogo imageUrl={guildData.imageUrl} />}
-        <VStack spacing={2} alignItems="start" w="full" maxW="full" mb="0.5" mt="-1">
-          <HStack spacing={1}>
-            <Text
-              as="span"
-              fontFamily="display"
-              fontSize="lg"
-              fontWeight="bold"
-              letterSpacing="wide"
-              maxW="full"
-              noOfLines={1}
-              wordBreak="break-all"
-            >
-              {guildData.name}
-            </Text>
-            {guildData.tags?.includes("VERIFIED") && <VerifiedIcon size={5} />}
-          </HStack>
+    <GuildCard guildData={guildData} guildLogoProps={guildLogoProps} {...rest} />
+  </Link>
+)
 
-          <Wrap zIndex="1">
-            <Tag as="li">
-              <TagLeftIcon as={Users} />
-              <TagLabel>
-                {new Intl.NumberFormat("en", { notation: "compact" }).format(
-                  guildData.memberCount ?? 0
-                )}
-              </TagLabel>
-            </Tag>
-            <Tag as="li">
-              <TagLabel>{pluralize(guildData.rolesCount ?? 0, "role")}</TagLabel>
-            </Tag>
-          </Wrap>
-        </VStack>
-        {/* {guildData.tags?.includes("FEATURED") && (
+const GuildCard = ({ guildData, guildLogoProps, ...rest }: Props): JSX.Element => (
+  <DisplayCard {...rest}>
+    <SimpleGrid
+      templateColumns={image ? "3rem calc(100% - 5.25rem)" : "1fr"}
+      gap={4}
+      alignItems="center"
+    >
+      {image && <GuildLogo imageUrl={guildData.imageUrl} {...guildLogoProps} />}
+      <VStack spacing={2} alignItems="start" w="full" maxW="full" mb="0.5" mt="-1">
+        <HStack spacing={1}>
+          <Text
+            as="span"
+            fontFamily="display"
+            fontSize="lg"
+            fontWeight="bold"
+            letterSpacing="wide"
+            maxW="full"
+            noOfLines={1}
+            wordBreak="break-all"
+          >
+            {guildData.name}
+          </Text>
+          {guildData.tags?.includes("VERIFIED") && <VerifiedIcon size={5} />}
+        </HStack>
+
+        <Wrap zIndex="1">
+          <Tag as="li">
+            <TagLeftIcon as={Users} />
+            <TagLabel>
+              {new Intl.NumberFormat("en", { notation: "compact" }).format(
+                guildData.memberCount ?? 0
+              )}
+            </TagLabel>
+          </Tag>
+          <Tag as="li">
+            <TagLabel>{pluralize(guildData.rolesCount ?? 0, "role")}</TagLabel>
+          </Tag>
+        </Wrap>
+      </VStack>
+      {/* {guildData.tags?.includes("FEATURED") && (
           <Tooltip label="This guild is featured by Guild.xyz" hasArrow>
             <ColorCardLabel
               fallbackColor="white"
@@ -92,9 +103,8 @@ const GuildCard = ({ guildData }: Props): JSX.Element => (
             />
           </Tooltip>
         )} */}
-      </SimpleGrid>
-    </DisplayCard>
-  </Link>
+    </SimpleGrid>
+  </DisplayCard>
 )
 
 const GuildSkeletonCard = () => (
@@ -116,5 +126,5 @@ const GuildSkeletonCard = () => (
   </DisplayCard>
 )
 
-export default GuildCard
-export { GuildSkeletonCard }
+export default GuildCardLink
+export { GuildSkeletonCard, GuildCard }

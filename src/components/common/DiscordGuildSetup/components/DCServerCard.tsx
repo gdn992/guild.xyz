@@ -72,7 +72,7 @@ const DCServerCard = ({ serverData, onSelect, onCancel }: Props): JSX.Element =>
           <Button
             h={10}
             colorScheme="DISCORD"
-            onClick={openAddBotPopup}
+            onClick={() => openAddBotPopup()}
             isLoading={!!activeAddBotPopup}
             rightIcon={<ArrowSquareIn />}
           >

@@ -1,6 +1,5 @@
 import {
   Box,
-  ButtonProps,
   Center,
   Img,
   ModalBody,
@@ -13,7 +12,7 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import ErrorAlert from "components/common/ErrorAlert"
 import { Modal } from "components/common/Modal"
 import useAccess from "components/[guild]/hooks/useAccess"

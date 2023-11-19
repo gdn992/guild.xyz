@@ -3,7 +3,7 @@ import Image from "next/image"
 import { memo } from "react"
 import { Rest } from "types"
 
-type Props = {
+export type GuildLogoProps = {
   imageUrl?: string
   imageQuality?: number
   size?: ResponsiveValue<number | string>
@@ -17,7 +17,7 @@ const GuildLogo = memo(
     size = "48px",
     priority = false,
     ...rest
-  }: Props): JSX.Element => {
+  }: GuildLogoProps): JSX.Element => {
     const { colorMode } = useColorMode()
 
     return (

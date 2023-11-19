@@ -132,7 +132,7 @@ const UploadMintLinks = ({
           onClick={() => onSubmit(mintLinks)}
           isLoading={isLoading}
           loadingText={loadingText}
-          isDisabled={!mintLinks?.length || isLoading || response}
+          isDisabled={Boolean(!mintLinks?.length || isLoading || response)}
           leftIcon={<Icon as={Upload} />}
         >
           Upload links

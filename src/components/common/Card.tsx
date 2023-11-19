@@ -1,16 +1,17 @@
-import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react"
-import { PropsWithChildren, forwardRef } from "react"
-import { Rest } from "types"
+import {
+  Box,
+  HTMLChakraProps,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react"
+import { forwardRef } from "react"
 
-type Props = {
+export type CardProps = {
   isFullWidthOnMobile?: boolean
-} & Rest
+} & HTMLChakraProps<"div">
 
 const Card = forwardRef(
-  (
-    { isFullWidthOnMobile = false, children, ...rest }: PropsWithChildren<Props>,
-    ref: any
-  ): JSX.Element => {
+  ({ isFullWidthOnMobile = false, children, ...rest }: CardProps, ref: any) => {
     const { colorMode } = useColorMode()
 
     return (
@@ -36,7 +37,6 @@ const Card = forwardRef(
     )
   }
 )
-
 export const useCardBg = () =>
   useColorModeValue("white", "var(--chakra-colors-gray-700)")
 

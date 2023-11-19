@@ -1,5 +1,4 @@
 import {
-  ButtonProps,
   Collapse,
   FormControl,
   FormLabel,
@@ -19,7 +18,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import { Error } from "components/common/Error"
 import { Modal } from "components/common/Modal"
 import useUser from "components/[guild]/hooks/useUser"
@@ -59,7 +58,6 @@ const TIMEOUT = 10_000
 
 const ConnectEmailButton = ({
   onSuccess,
-
   ...props
 }: ButtonProps & { onSuccess?: () => void; isReconnection?: boolean }) => {
   const { emails } = useUser()

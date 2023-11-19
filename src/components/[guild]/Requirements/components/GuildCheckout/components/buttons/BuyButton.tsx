@@ -95,17 +95,18 @@ const BuyButton = (): JSX.Element => {
       ? coinBalanceData?.value >= fee
       : tokenBalanceData?.value >= fee)
 
-  const isDisabled =
+  const isDisabled = Boolean(
     !payFee ||
-    error ||
-    payFeeError ||
-    !agreeWithTOS ||
-    Chains[chainId] !== requirement.chain ||
-    (!isVaultLoading && !isHasPaidLoading && !multiplePayments && hasPaid) ||
-    (!pickedCurrencyIsNative &&
-      (isAllowanceLoading || allowanceError || !isSufficientAllowance)) ||
-    isBalanceLoading ||
-    !isSufficientBalance
+      error ||
+      payFeeError ||
+      !agreeWithTOS ||
+      Chains[chainId] !== requirement.chain ||
+      (!isVaultLoading && !isHasPaidLoading && !multiplePayments && hasPaid) ||
+      (!pickedCurrencyIsNative &&
+        (isAllowanceLoading || allowanceError || !isSufficientAllowance)) ||
+      isBalanceLoading ||
+      !isSufficientBalance
+  )
 
   const errorMsg =
     (!multiplePayments && hasPaid && "Already paid") ||

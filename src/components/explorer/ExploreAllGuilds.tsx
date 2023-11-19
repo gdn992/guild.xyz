@@ -18,7 +18,7 @@ import { BATCH_SIZE } from "components/_app/ExplorerProvider"
 import ClientOnly from "components/common/ClientOnly"
 import Section from "components/common/Section"
 import ExplorerCardMotionWrapper from "components/explorer/ExplorerCardMotionWrapper"
-import GuildCard from "components/explorer/GuildCard"
+import GuildCardLink from "components/explorer/GuildCard"
 import GuildCardsGrid from "components/explorer/GuildCardsGrid"
 import SearchBar from "components/explorer/SearchBar"
 import useIsStuck from "hooks/useIsStuck"
@@ -145,7 +145,7 @@ const ExploreAllGuilds = forwardRef(({ guildsInitial }: Props, ref: any) => {
           <GuildCardsGrid>
             {renderedGuilds.map((guild) => (
               <ExplorerCardMotionWrapper key={guild.urlName}>
-                <GuildCard guildData={guild} />
+                <GuildCardLink guildData={guild} />
               </ExplorerCardMotionWrapper>
             ))}
           </GuildCardsGrid>

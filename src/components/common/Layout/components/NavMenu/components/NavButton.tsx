@@ -1,5 +1,4 @@
-import { ButtonProps } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import Button, { ButtonProps } from "components/common/Button"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { forwardRef, PropsWithChildren, Ref } from "react"

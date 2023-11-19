@@ -1,12 +1,11 @@
-import { useColorMode } from "@chakra-ui/react"
+import { HTMLChakraProps, useColorMode } from "@chakra-ui/react"
 import Card from "components/common/Card"
 import { PropsWithChildren } from "react"
-import { Rest } from "types"
 
 const DisplayCard = ({
   children,
   ...rest
-}: PropsWithChildren<Rest>): JSX.Element => {
+}: PropsWithChildren<HTMLChakraProps<"div">>): JSX.Element => {
   const { colorMode } = useColorMode()
 
   return (

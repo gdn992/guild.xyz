@@ -1,5 +1,5 @@
-import { ButtonProps, Icon } from "@chakra-ui/react"
-import Button from "components/common/Button"
+import { Icon } from "@chakra-ui/react"
+import Button, { ButtonProps } from "components/common/Button"
 import useUser from "components/[guild]/hooks/useUser"
 import useConnectPlatform from "components/[guild]/JoinModal/hooks/useConnectPlatform"
 import useToast from "hooks/useToast"
