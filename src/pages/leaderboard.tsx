@@ -156,6 +156,10 @@ const Page = ({ leaderboard: initialData }: Props) => {
 }
 
 const getStaticProps: GetStaticProps = async () => {
+  return {
+    notFound: true,
+  }
+
   const leaderboardTopAddresses: string[] = await kv.zrange(
     "guildPinsLeaderboard",
     0,
