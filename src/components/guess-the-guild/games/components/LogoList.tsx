@@ -16,15 +16,13 @@ const LogoListItem: React.FC<IGuildLogoListItemProps> = ({
 
   return (
     <Circle
-      size={"64px"}
+      size={"48px"}
       outline={`${highlighted ? "3px" : "0"} solid`}
-      mt={1}
-      mb={5}
       outlineOffset={3}
       outlineColor={colorMode === "light" ? "gray.800" : "white"}
       {...rest}
     >
-      <GuildLogo size={"64px"} imageUrl={logo} />
+      <GuildLogo size={"48px"} imageUrl={logo} />
     </Circle>
   )
 }
@@ -39,16 +37,29 @@ const LogoList: React.FC<LogosProps> = ({
   selectedLogoIndex,
   logos,
   onLogoSelected,
-}) => (
-  <HStack justifyContent={"center"} w={"full"}>
-    {logos.map((logo, index) => (
-      <LogoListItem
-        highlighted={index === selectedLogoIndex}
-        key={index}
-        logo={logo}
-        onClick={() => onLogoSelected(index, logo)}
-      />
-    ))}
-  </HStack>
-)
+}) => {
+  const { colorMode } = useColorMode()
+
+  return (
+    <HStack
+      justifyContent={"center"}
+      w={"full"}
+      pos={"sticky"}
+      top={0}
+      pb={2}
+      pt={2}
+      zIndex={"sticky"}
+      backgroundColor={colorMode === "light" ? "white" : "gray.700"}
+    >
+      {logos.map((logo, index) => (
+        <LogoListItem
+          highlighted={index === selectedLogoIndex}
+          key={index}
+          logo={logo}
+          onClick={() => onLogoSelected(index, logo)}
+        />
+      ))}
+    </HStack>
+  )
+}
 export default LogoList

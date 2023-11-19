@@ -79,7 +79,7 @@ const PairTheLogosContent: React.FC<IPairTheLogosContentProps> = ({
   }
 
   return (
-    <VStack gap={3} w={"full"}>
+    <VStack gap={1}>
       <LogoList
         selectedLogoIndex={selectedLogoIndex}
         onLogoSelected={handleLogoSelect}

@@ -98,19 +98,19 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
       isOpen={Boolean(isOpen && answerGuilds)}
       onClose={handleCloseModal}
       scrollBehavior="inside"
-      size={"md"}
+      size={"sm"}
       initialFocusRef={modalContentRef}
     >
       <ModalOverlay />
       <ModalContent ref={modalContentRef}>
-        <ModalHeader textAlign={"center"}>
+        <ModalHeader p={5} textAlign={"center"}>
           {result !== undefined
             ? goodJob
               ? "Good job"
               : "Oops! Better luck next time."
             : "Guess the guild by the logo"}
         </ModalHeader>
-        <ModalBody>
+        <ModalBody pt={0} pb={0}>
           {newRecord && <NewRecordCelebration newRecord={newRecord} />}
           {!result && answerGuilds && (
             <PairTheLogosContent
@@ -122,7 +122,7 @@ const PairTheLogos: React.FC<IPairTheLogosProps> = ({
           )}
           {result && <PairGameResultContent result={result} />}
         </ModalBody>
-        <ModalFooter gap={3}>
+        <ModalFooter p={5} gap={3}>
           {result === undefined ? (
             <ModalButton
               onClick={handleCheckTheAnswers}
