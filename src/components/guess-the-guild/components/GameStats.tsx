@@ -44,7 +44,8 @@ const GameStats: React.FC<IGameStatsProps> = ({
         w={{ sm: 370 }}
         pb={3}
       >
-        If you consider change the difficulty, just click this fancy colorful button.
+        If you consider changing the difficulty, just click this fancy, colorful
+        button.
       </FancyText>
       <HStack justifyContent={"space-between"} alignItems={"start"}>
         <HStack>
